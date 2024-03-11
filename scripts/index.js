@@ -5,7 +5,7 @@ function createCard(name, link, remove) {
   cardElement.querySelector('.card__title').textContent = name;
   const deleteButton = cardElement.querySelector('.card__delete-button');
   deleteButton.addEventListener('click', remove);
-  document.querySelector('.places__list').append(cardElement);
+  return cardElement;
 }
 
 function removeCallback(event) {
@@ -13,16 +13,11 @@ function removeCallback(event) {
   const deleteItem = eventTarget.closest('li');
   deleteItem.remove();
 }
-const addButton = document.querySelector('.profile__add-button');
 
-addButton.addEventListener('click', function () {
-  initialCards.forEach(function (item) {
-    createCard(item.name, item.link, removeCallback);
-  });
-});
+const cardContainer = document.querySelector('.places__list');
 
 initialCards.forEach(function (item) {
-  createCard(item.name, item.link, removeCallback);
+  cardContainer.append(createCard(item.name, item.link, removeCallback));
 });
 // @todo: Темплейт карточки
 
